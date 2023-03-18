@@ -14,20 +14,40 @@ hemo_dat <- read.csv("data/hsc_hemo_dat.csv")
 ```{r}
 
 plot(glucose~ cell_density, data = hemo_dat)
+abline(lm(glucose ~ cell_density, data = hemo_dat))
+
 plot(lactate ~ cell_density, data = hemo_dat)
+abline(lm(lactate ~ cell_density, data = hemo_dat))
 
 ```
 
 ```{r}
 
 boxplot(lactate ~ age, data = hemo_dat,
-        main = "Lactate conventration as an effect of Age in Horseshoe Crabs")
+        main = "HSC L-lactate concentration vs. age")
 
 ```
 
 ```{r}
 boxplot(glucose ~ age, data = hemo_dat,
-        main = "Glucose conventration as an effect of Age in Horseshoe Crabs")
+        main = "HSC Glucose concentration vs. Age")
 
 ```
 
+```{r}
+boxplot(protein ~ age, data = hemo_dat, 
+        main = "HSC Protein Concentration vs. Age")
+```
+
+```{r}
+plot(protein ~ glucose, data = hemo_dat)
+abline(lm(protein ~ glucose, data = hemo_dat))
+
+plot(protein ~ lactate, data = hemo_dat)
+abline(lm(protein ~ lactate, data = hemo_dat))
+
+```
+
+```{r}
+
+```
