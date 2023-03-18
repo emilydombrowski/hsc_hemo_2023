@@ -1,0 +1,33 @@
+---
+title: "hsc_2023_markdown"
+author: "Emily Dombrowski"
+date: "3/14/2023"
+output: html_document
+---
+
+```{r}
+
+hemo_dat <- read.csv("data/hsc_hemo_dat.csv")
+
+```
+
+```{r}
+
+plot(glucose~ cell_density, data = hemo_dat)
+plot(lactate ~ cell_density, data = hemo_dat)
+
+```
+
+```{r}
+
+boxplot(lactate ~ age, data = hemo_dat,
+        main = "Lactate conventration as an effect of Age in Horseshoe Crabs")
+
+```
+
+```{r}
+boxplot(glucose ~ age, data = hemo_dat,
+        main = "Glucose conventration as an effect of Age in Horseshoe Crabs")
+
+```
+
