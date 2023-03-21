@@ -9,6 +9,7 @@ output: html_document
 
 hemo_dat <- read.csv("data/hsc_hemo_dat.csv")
 
+library(car)
 ```
 
 ```{r}
@@ -16,27 +17,60 @@ hemo_dat <- read.csv("data/hsc_hemo_dat.csv")
 plot(glucose~ cell_density, data = hemo_dat)
 abline(lm(glucose ~ cell_density, data = hemo_dat))
 
+glu_den_mod <- lm(glucose~ cell_density, data = hemo_dat)
+summary(glu_den_mod)
+anova(glu_den_mod)
+car::Anova(glu_den_mod, type = 3)
+
 plot(lactate ~ cell_density, data = hemo_dat)
 abline(lm(lactate ~ cell_density, data = hemo_dat))
+
+lac_den_mod <- lm(lactate~ cell_density, data = hemo_dat)
+summary(lac_den_mod)
+anova(lac_den_mod)
+car::Anova(lac_den_mod, type = 3)
 
 ```
 
 ```{r}
 
 boxplot(lactate ~ age, data = hemo_dat,
+        col=c("azure", "cornflowerblue", "darkcyan"),
         main = "HSC L-lactate concentration vs. age")
 
+lac_age_mod <- lm(lactate~age, data = hemo_dat)
+summary(lac_age_mod)
+anova(lac_age_mod)
+
+lac_age_aov <- aov(lactate~as.factor(age), data = hemo_dat)
+TukeyHSD(lac_age_aov, conf.level = 0.95)
 ```
 
 ```{r}
 boxplot(glucose ~ age, data = hemo_dat,
+        col=c("azure", "cornflowerblue", "darkcyan"),
         main = "HSC Glucose concentration vs. Age")
+
+glu_age_mod <- lm(glucose~age, data = hemo_dat)
+summary(glu_age_mod)
+anova(glu_age_mod)
+
+glu_age_aov <- aov(glucose~as.factor(age), data = hemo_dat)
+TukeyHSD(glu_age_aov, conf.level = 0.95)
 
 ```
 
 ```{r}
 boxplot(protein ~ age, data = hemo_dat, 
+        col=c("azure", "cornflowerblue", "darkcyan"),
         main = "HSC Protein Concentration vs. Age")
+
+pro_age_mod <- lm(protein~age, data = hemo_dat)
+summary(pro_age_mod)
+anova(pro_age_mod)
+
+pro_age_aov <- aov(protein~as.factor(age), data = hemo_dat)
+TukeyHSD(pro_age_aov, conf.level = 0.95)
 ```
 
 ```{r}
@@ -49,5 +83,25 @@ abline(lm(protein ~ lactate, data = hemo_dat))
 ```
 
 ```{r}
+plot(pre_blood_met_rate ~ glucose, data = hemo_dat)
+abline(lm(pre_blood_met_rate ~ glucose, data = hemo_dat))
+
+plot(post_blood_met_rate ~ glucose, data = hemo_dat)
+abline(lm(post_blood_met_rate ~ glucose, data = hemo_dat))
+
+plot(pre_blood_met_rate ~ lactate, data = hemo_dat)
+abline(lm(pre_blood_met_rate ~ lactate, data = hemo_dat))
+
+plot(post_blood_met_rate ~ lactate, data = hemo_dat)
+abline(lm(post_blood_met_rate ~ lactate, data = hemo_dat))
+```
+
+```{r}
+
+plot(unbound_hemocyanin ~ lactate, data = hemo_dat)
+abline(lm(unbound_hemocyanin ~ lactate, data = hemo_dat))
+
+plot(unbound_hemocyanin ~ glucose, data = hemo_dat)
+abline(lm(unbound_hemocyanin ~ glucose, data = hemo_dat))
 
 ```
