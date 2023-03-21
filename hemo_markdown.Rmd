@@ -105,3 +105,10 @@ plot(unbound_hemocyanin ~ glucose, data = hemo_dat)
 abline(lm(unbound_hemocyanin ~ glucose, data = hemo_dat))
 
 ```
+
+```{r}
+
+boxplot(unbound_hemocyanin ~ age, data = hemo_dat)
+
+
+```
