@@ -8,6 +8,7 @@ output: html_document
 ```{r}
 
 hemo_dat <- read.csv("data/hsc_hemo_dat.csv")
+as.double(hemo_dat$glu_mm)
 
 library(car)
 ```
@@ -34,9 +35,9 @@ car::Anova(lac_den_mod, type = 3)
 
 ```{r}
 
-boxplot(lactate ~ age, data = hemo_dat,
+boxplot(lactat_mm ~ age, data = hemo_dat,
         col=c("azure", "cornflowerblue", "darkcyan"),
-        ylab = "Lactate Concentration (μM)",
+        ylab = "Lactate Concentration (mM)",
         xlab = "Age")
 
 lac_age_mod <- lm(lactate~age, data = hemo_dat)
@@ -48,12 +49,12 @@ TukeyHSD(lac_age_aov, conf.level = 0.95)
 ```
 
 ```{r}
-boxplot(glucose ~ age, data = hemo_dat,
+boxplot(glu_mm ~ age, data = hemo_dat,
         col=c("azure", "cornflowerblue", "darkcyan"),
-        main = "HSC Glucose concentration vs. Age",
         xlab = "Age",
-        ylab = "Glucose Concentration (μM)")
+        ylab = "Glucose Concentration (mM)")
 
+boxplot(glu_mm ~ age, data = hemo_dat)
 glu_age_mod <- lm(glucose~age, data = hemo_dat)
 summary(glu_age_mod)
 anova(glu_age_mod)
